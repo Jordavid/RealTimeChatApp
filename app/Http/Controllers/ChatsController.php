@@ -22,7 +22,13 @@ class ChatsController extends Controller
         //return $request->all();
         $user = Auth::user();
 
+        $this->saveToSession($request);
         event(new ChatEvent($user, $request->message));
+    }
+    
+    protected function saveToSession($request){
+        session()->put('chats', $request->message);
+        session()->put('chats', $request->message);
     }
 
     // public function send(Request $request)

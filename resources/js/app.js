@@ -10,8 +10,20 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Vue from 'vue'
+
+// For Scrolling 
 import VueChatScroll from 'vue-chat-scroll'
+
 Vue.use(VueChatScroll)
+ 
+// For Notifications
+import Toaster from 'v-toaster'
+
+Vue.use(Toaster, {timeout: 5000})
+
+import 'v-toaster/dist/v-toaster.css'
+
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -38,7 +50,8 @@ const app = new Vue({
             color:[],
             time:[]
         },
-        typing:''
+        typing:'',
+        numberOfUsers: 0
     },
 
     watch:{
@@ -61,7 +74,7 @@ const app = new Vue({
 
                 axios.post('/send', {
                     message: this.message,
-                    user:this.user
+                    user: this.user
                   })
                   .then(response => {
                     console.log(response.user);
@@ -91,12 +104,26 @@ const app = new Vue({
         })
             .listenForWhisper('typing', (e) => {
                 if(e.message !== ''){
-                    this.typing = "Some one is typing..."
+                    this.typing = " Typing..."
                 } else{
                     this.typing = ""
                 }
             });
-
+            Echo.join(`chat`)
+                .here((users) => {
+                    console.log(users)
+                    this.numberOfUsers = users.length;
+                })
+                .joining((user) => {
+                    this.numberOfUsers += 1;
+                    this.$toaster.info(user.name + ' has joined the chat.');
+                    console.log(user.name + " Joined");
+                })
+                .leaving((user) => {
+                    this.numberOfUsers -= 1;
+                    this.$toaster.warning(user.name + ' left the chat.');
+                    console.log(user.name + " Left");
+                });
         console.log('Mounted');
     }
 });
