@@ -58,7 +58,7 @@ const app = new Vue({
         message(){
             Echo.private('chat')
                 .whisper('typing', {
-                    message: this.message
+                    message: this.message,
                 });
         }
     },
@@ -104,7 +104,7 @@ const app = new Vue({
         })
             .listenForWhisper('typing', (e) => {
                 if(e.message !== ''){
-                    this.typing = " Typing..."
+                    this.typing = "Typing..."
                 } else{
                     this.typing = ""
                 }

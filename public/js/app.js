@@ -58895,7 +58895,7 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
       console.log(e);
     }).listenForWhisper('typing', function (e) {
       if (e.message !== '') {
-        _this.typing = " Typing...";
+        _this.typing = "Typing...";
       } else {
         _this.typing = "";
       }
