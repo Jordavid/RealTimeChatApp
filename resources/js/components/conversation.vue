@@ -59,7 +59,7 @@
                 There are no Messages
             </div>
 
-        <chat-form :user_id="user_id" :friend_id="friend_id" :conversations="conversations" :time="time"></chat-form>
+        <chat-form :user_id="user_id" :friend_id="friend_id" :conversations="conversations"></chat-form>
         
     </div>
 </template>
@@ -69,8 +69,7 @@
         props:[
             'conversations',
             'user_id',
-            'friend_id',
-            'time'
+            'friend_id'
         ],
 
         mounted() {

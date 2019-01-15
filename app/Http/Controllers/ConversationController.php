@@ -20,6 +20,7 @@ class ConversationController extends Controller
     public function index()
     {
         $friends = Auth::user()->friends();
+       
         return view('conversation.index')->withFriends($friends);
     }
 

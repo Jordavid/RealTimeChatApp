@@ -1778,7 +1778,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['conversations', 'user_id', 'friend_id', 'time'],
+  props: ['conversations', 'user_id', 'friend_id'],
   data: function data() {
     return {
       conversation: ''
@@ -1795,7 +1795,6 @@ __webpack_require__.r(__webpack_exports__);
           user_id: this.user_id
         };
         console.log(this.conversation);
-        this.chat.time.push(this.getTime());
         this.conversation = '';
         axios.post('/conversation/sendConversation', data).then(function (response) {
           _this.conversations.push(data);
@@ -1887,7 +1886,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['conversations', 'user_id', 'friend_id', 'time'],
+  props: ['conversations', 'user_id', 'friend_id'],
   mounted: function mounted() {
     console.log('Component mounted.');
   }
@@ -47933,8 +47932,7 @@ var render = function() {
         attrs: {
           user_id: _vm.user_id,
           friend_id: _vm.friend_id,
-          conversations: _vm.conversations,
-          time: _vm.time
+          conversations: _vm.conversations
         }
       })
     ],
@@ -59794,15 +59792,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./resources/js/components/online-user.vue ***!
   \*************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _online_user_vue_vue_type_template_id_4bff8b8a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./online-user.vue?vue&type=template&id=4bff8b8a& */ "./resources/js/components/online-user.vue?vue&type=template&id=4bff8b8a&");
 /* harmony import */ var _online_user_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./online-user.vue?vue&type=script&lang=js& */ "./resources/js/components/online-user.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _online_user_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _online_user_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _online_user_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./online-user.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/online-user.vue?vue&type=style&index=0&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _online_user_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./online-user.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/online-user.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -59834,7 +59831,7 @@ component.options.__file = "resources/js/components/online-user.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/online-user.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59896,8 +59893,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Maxes\New\RealTimeChatApp\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Maxes\New\RealTimeChatApp\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Projectts\RealTimeChatApp\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Projectts\RealTimeChatApp\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
