@@ -45,18 +45,21 @@
              <div class="conversation" v-if="conversations.length != 0">
                 <div v-for="conversation in conversations" :key="conversation.index" style="overflow:auto">
                     <div class="chat-right" v-if="conversation.user_id == user_id">
-                        {{ conversation.conversation}}
+                        {{ conversation.conversation}} 
+                        
                     </div>
                     <div class="chat-left" v-else>
                         {{ conversation.conversation}}
+                        
                     </div>
+                    
                 </div>
             </div>
             <div v-else class="no-message">
                 There are no Messages
             </div>
 
-        <chat-form :user_id="user_id" :friend_id="friend_id" :conversations="conversations"></chat-form>
+        <chat-form :user_id="user_id" :friend_id="friend_id" :conversations="conversations" :time="time"></chat-form>
         
     </div>
 </template>
@@ -66,7 +69,8 @@
         props:[
             'conversations',
             'user_id',
-            'friend_id'
+            'friend_id',
+            'time'
         ],
 
         mounted() {

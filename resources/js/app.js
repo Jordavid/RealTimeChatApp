@@ -40,14 +40,22 @@ import Axios from 'axios';
 Vue.component('message', require('./components/message.vue').default);
 Vue.component('conversation', require('./components/conversation.vue').default);
 Vue.component('chat-form', require('./components/chat-form.vue').default);
-
+Vue.component('online-user', require('./components/online-user.vue').default);
 const app = new Vue({
     el: "#app",
 
     data:{
-        conversations: ''
+        conversations: '',
+        onlineUsers: ''
     },
-
+    watch:{
+        message(){
+            Echo.private('conversations')
+                .whisper('typing', {
+                    message: this.message,
+                });
+        }
+    },
     created(){
             const user_id = $('meta[name="user_id"]').attr('content');
             const friend_id = $('meta[name="friend_id"]').attr('content');
@@ -63,7 +71,30 @@ const app = new Vue({
                     .listen('BroadcastChat', (e) => {
                         //document.getElementById('ChatAudio').play();
                     this.conversations.push(e.conversation);
-                });
+                }).listenForWhisper('typing', (e) => {
+                    if(e.message !== ''){
+                        this.typing = "Typing..."
+                    } else{
+                        this.typing = ""
+                    }
+                });;
+        }
+
+        if(user_id != 'null'){
+            Echo.join('Online')
+                .here((users) => {
+                    this.onlineUsers = users;
+                })
+                .joining((user) => {
+                    this.onlineUsers.push(user);
+                    this.$toaster.info(user.name + ' is now online.');
+
+                })
+                .leaving((user) => {
+                    this.onlineUsers = this.onlineUsers.filter((u) => (u != user));
+                    this.$toaster.warning(user.name + ' went offline.');
+
+                })
         }
     }
 });

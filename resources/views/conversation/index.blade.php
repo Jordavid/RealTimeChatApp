@@ -7,8 +7,9 @@
                 <div class="panel">
                     <div class="panel-heading">List of Friends</div>
                     @forelse ($friends as $friend)
-                        <a href="{{route('conversation.show', $friend->id)}}" class="panel-block">
-                            {{$friend->name}}
+                        <a href="{{route('conversation.show', $friend->id)}}" class="panel-block" style="justify-content: space-between">
+                            <div>{{$friend->name}}</div>
+                            <online-user :friend="{{$friend}}" :onlineusers="onlineUsers"></online-user>
                         </a>
                     @empty
                         <div class="panel-block">

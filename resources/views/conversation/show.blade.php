@@ -17,6 +17,7 @@
                     <conversation :conversations="conversations" :user_id={{Auth::user()->id}}
                         :friend_id="{{$friend->id}}" 
                         >
+                        <span id="time" :time=time>@{{time}}</span>
                     </conversation>
                 </div>
                 

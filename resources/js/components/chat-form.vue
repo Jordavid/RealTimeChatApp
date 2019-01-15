@@ -15,7 +15,7 @@
 <script>
 export default {
     props:[
-        'conversations', 'user_id', 'friend_id'
+        'conversations', 'user_id', 'friend_id', 'time'
     ],
     
     data() {
@@ -30,10 +30,11 @@ export default {
                 var data = {
                     conversation: this.conversation,
                     friend_id: this.friend_id,
-                    user_id: this.user_id
+                    user_id: this.user_id,
+                    
                 }
-                console.log(this.conversation)
-                
+                console.log(this.conversation);
+                this.chat.time.push(this.getTime());
                 this.conversation = '';
 
                 axios.post('/conversation/sendConversation', data)
@@ -42,7 +43,11 @@ export default {
                 });
             }
             
-        }
+        },
+         getTime(){
+            let time = new Date();
+            return time.getHours()+':'+time.getMinutes();
+         }
     },
 }
 </script>
