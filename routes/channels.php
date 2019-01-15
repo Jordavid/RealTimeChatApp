@@ -11,10 +11,10 @@
 |
 */
 
-Broadcast::channel('App.User.{id}', function ($user, $id) {
-    return (int) $user->id === (int) $id;
-});
+// Broadcast::channel('App.User.{id}', function ($user, $id) {
+//     return (int) $user->id === (int) $id;
+// });
 
-Broadcast::channel('chat', function($user){
-    return ['name' => $user->name, 'id' => $user->id];
+Broadcast::channel('Conversation.{user_id}.{friend_id}', function($user, $user_id, $friend_id){
+    return $user->id == $friend_id;
 });

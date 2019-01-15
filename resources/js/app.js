@@ -22,6 +22,7 @@ import Toaster from 'v-toaster'
 Vue.use(Toaster, {timeout: 5000})
 
 import 'v-toaster/dist/v-toaster.css'
+import Axios from 'axios';
 
 
 
@@ -37,9 +38,37 @@ import 'v-toaster/dist/v-toaster.css'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('message', require('./components/message.vue').default);
-
+Vue.component('conversation', require('./components/conversation.vue').default);
+Vue.component('chat-form', require('./components/chat-form.vue').default);
 
 const app = new Vue({
+    el: "#app",
+
+    data:{
+        conversations: ''
+    },
+
+    created(){
+            const user_id = $('meta[name="user_id"]').attr('content');
+            const friend_id = $('meta[name="friend_id"]').attr('content');
+
+            if(friend_id != undefined){
+
+                Axios.post('/conversation/getConversation/' + friend_id)
+                .then((response) => {
+                    this.conversations = response.data;
+                });
+
+                Echo.private('Conversation.' + friend_id + '.' + user_id)
+                    .listen('BroadcastChat', (e) => {
+                        //document.getElementById('ChatAudio').play();
+                    this.conversations.push(e.conversation);
+                });
+        }
+    }
+});
+
+/* const app = new Vue({
     el: '#app',
 
     data: {
@@ -126,4 +155,4 @@ const app = new Vue({
                 });
         console.log('Mounted');
     }
-});
+}); */
