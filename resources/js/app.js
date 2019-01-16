@@ -41,12 +41,17 @@ Vue.component('message', require('./components/message.vue').default);
 Vue.component('conversation', require('./components/conversation.vue').default);
 Vue.component('chat-form', require('./components/chat-form.vue').default);
 Vue.component('online-user', require('./components/online-user.vue').default);
+Vue.component('notification', require('./components/notification.vue').default);
+
+
 const app = new Vue({
     el: "#app",
 
     data:{
         conversations: '',
-        onlineUsers: ''
+        onlineUsers: '',
+        notifications: '',
+        number: ''
     },
     watch:{
         message(){
@@ -57,12 +62,26 @@ const app = new Vue({
         }
     },
     created(){
+
+        axios.post('/notification/getNotification').then(response => {
+            this.notifications = response.data;
+            this.number = response.data.length;
+
+            //console.log(this.number)
+        });
+
             const user_id = $('meta[name="user_id"]').attr('content');
             const friend_id = $('meta[name="friend_id"]').attr('content');
 
+            //var userID = $('meta[name="user_id"]').attr('content');
+            Echo.private('App.User.' + user_id).notification((notification) => {
+                this.notifications.push(notification);
+                //console.log(notification);
+            });
+
             if(friend_id != undefined){
 
-                Axios.post('/conversation/getConversation/' + friend_id)
+                axios.post('/conversation/getConversation/' + friend_id)
                 .then((response) => {
                     this.conversations = response.data;
                 });
@@ -96,6 +115,9 @@ const app = new Vue({
 
                 })
         }
+
+        
+
     }
 });
 

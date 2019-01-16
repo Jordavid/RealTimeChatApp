@@ -6,6 +6,7 @@ use App\Conversation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Notifications\NotifyMessageReceiver;
 
 class ConversationController extends Controller
 {
@@ -70,11 +71,18 @@ class ConversationController extends Controller
 
     public function sendConversation(Request $request)
     {
-        Conversation::create([
+        $user = Auth::user();
+        $sender_name = $user->name;
+        $conversation = Conversation::create([
             'user_id' => $request->user_id,
             'friend_id' => $request->friend_id,
+            'sender_name' => $sender_name,
             'conversation' => $request->conversation
         ]);
+
+        $receiver = $request->friend_id;
+
+        User::find($receiver)->notify(new NotifyMessageReceiver($conversation));
 
         return [];
 

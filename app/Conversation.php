@@ -15,6 +15,7 @@ class Conversation extends Model
     protected $fillable = [
         'user_id',
         'friend_id',
+        'sender_name',
         'conversation'
     ];
 }
