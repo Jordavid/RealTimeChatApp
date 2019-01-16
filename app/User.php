@@ -33,13 +33,13 @@ class User extends Authenticatable
         return $this->belongsToMany('App\User', 'friends', 'user_id', 'friend_id');
     }
 
-    public function friendsOf()
+    public function friendOf()
     {
         return $this->belongsToMany('App\User', 'friends', 'friend_id', 'user_id');
     }
 
     public function friends()
     {
-        return $this->friendsOfMine->merge($this->friendsOf);
+        return $this->friendsOfMine->merge($this->friendOf);
     }
 }
