@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                <i class="fa fa-bell"></i> Messages <span class="badge badge-pill badge-danger">2</span> <span class="caret"></span>
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-bell"></i> Messages <span class="badge badge-pill badge-danger" v-if="notifications.length">{{notifications.length}}</span> <span class="caret"></span>
             </a>
 
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
